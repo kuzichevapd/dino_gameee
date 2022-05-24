@@ -7,8 +7,8 @@ import com.dinogame.model.Ground;
 
 
 public class GroundView {
-    private Ground ground;
-    private Texture sprite;
+    final private Ground ground;
+    final private Texture sprite;
 
     public GroundView(Ground ground) {
         this.ground = ground;

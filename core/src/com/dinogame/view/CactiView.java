@@ -13,10 +13,9 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class CactiView {
     Map<Integer, Integer> spritesById;
-    private CactusSpawner spawner;
-    //список со спрайтами кактусов. Для разнообразия.
-    private ArrayList<Texture> sprites;
-    private ArrayList<CactiView> views;
+    final private CactusSpawner spawner;
+    //список со спрайтами кактусов
+    final private ArrayList<Texture> sprites;
     private int firstId;
 
     public CactiView(CactusSpawner spawner) {
@@ -30,6 +29,7 @@ public class CactiView {
     public void drawCactus(SpriteBatch batch, Cactus cactus) {
         int id = cactus.getId();
         if (spritesById.get(id) == null) {
+            // привязка ранодомного спрайта кактуса к айди
             int randIndex = ThreadLocalRandom.current().nextInt(0, sprites.size());
             spritesById.put(id, randIndex);
         }
@@ -48,11 +48,14 @@ public class CactiView {
         }
     }
 
-    //??
     private void updateFirstId() {
         if (spawner.getCacti().size() > 0) {
+            // индекс последнего созданного кактуса
             int lastIndex = spawner.getCacti().size() - 1;
+            // айди последнего созданного кактуса
             int lastId = spawner.getCacti().get(lastIndex).getId();
+            // если айди первого кактуса не равен ранее запомненному айди,
+            // то это значит, что кактус удален из общего массива кактусов в CactusSpawner
             if (lastId - lastIndex != firstId) {
                 spritesById.remove(firstId);
                 firstId = lastId - lastIndex;

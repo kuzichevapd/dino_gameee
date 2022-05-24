@@ -8,8 +8,8 @@ import com.dinogame.Config;
 import com.dinogame.model.Hero;
 
 public class HeroView {
-    private Hero hero;
-    private TextureRegion heroSprite;
+    final private Hero hero;
+    final private TextureRegion heroSprite;
     private Texture animationFrames;
     private Animation<TextureRegion> runAnimation;
 

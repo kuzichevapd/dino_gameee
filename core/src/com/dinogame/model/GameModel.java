@@ -2,9 +2,9 @@ package com.dinogame.model;
 import com.dinogame.Config;
 public class GameModel {
     //игровые сущности
-    private Hero hero;
-    private Ground ground;
-    private CactusSpawner cactusSpawner;
+    final private Hero hero;
+    final private Ground ground;
+    final private CactusSpawner cactusSpawner;
     //текущее время с начала игры.
     private float gameTime;
     private GameState gameState;
@@ -62,7 +62,8 @@ public class GameModel {
     }
 
     //обновляет состояние персонажа
-    //??
+    // если он приземлился - то продолжаем бег
+    // если состояние - JUMPED, придаем ускорение вверх
     private void heroUpdate() {
         if (hero.checkCollision(ground) && hero.velocity.y < 0) {
             hero.run();
@@ -75,7 +76,7 @@ public class GameModel {
     }
 
     //обоновляет состояние генератора кактусов
-    //??
+    // если столкнулся - останавливаем игру
     private void cactusSpawnerUpdate() {
         cactusSpawner.spawn(gameTime);
         cactusSpawner.checkInvisible();

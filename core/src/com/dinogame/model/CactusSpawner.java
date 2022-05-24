@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 public class CactusSpawner {
     //место создания кактусов
-    private Vector2 spawnPosition;
+    final private Vector2 spawnPosition;
     //список с отображаемыми на экране кактусами.
-    private ArrayList<Cactus> cacti;
+    final private ArrayList<Cactus> cacti;
     //промежуток времени между кактусами. Задается рандомно после каждого создания.
     private double spawnTime;
     private int counter;
@@ -30,7 +30,7 @@ public class CactusSpawner {
         if (spawnTime < gameTime) {
             //класс ThreadLocalRandom - это объеденение классов ThreadLocal и Random,
             // но последний плохо работает в многопоточной среде
-            // генерация одного из двух кактусов рандомно
+            // проверка - настало ли время для спавна нового кактуса
             int spriteNumber = ThreadLocalRandom.current().nextInt(0, 2);
             cacti.add(createCactus(spriteNumber));
             spawnTime = ThreadLocalRandom.current().nextDouble(gameTime + 0.8, gameTime + 2);
@@ -40,6 +40,7 @@ public class CactusSpawner {
     //создаем объект кактуса
     private Cactus createCactus(int spriteNumber) {
         Cactus cactus = new Cactus(spawnPosition.x, spawnPosition.y, counter);
+        // айди последующего увеличивается на один
         counter++;
         //все кактусы двигаются в направлении игрока
         cactus.setVelocity(-Config.RUN_SPEED, 0);

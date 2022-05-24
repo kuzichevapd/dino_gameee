@@ -5,9 +5,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.dinogame.Config;
 
 public class RestartButton {
-    private Texture sprite;
-    private int x;
-    private int y;
+    final private Texture sprite;
+    final private int x;
+    final private int y;
 
     public RestartButton() {
         sprite = new Texture(Config.BUTTON_SPRITE_NAME);
