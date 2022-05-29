@@ -23,4 +23,8 @@ public class GroundView {
         batch.draw(sprite, x, y);
         batch.draw(sprite, x + width, y);
     }
+
+    public void dispose() {
+        sprite.dispose();
+    }
 }

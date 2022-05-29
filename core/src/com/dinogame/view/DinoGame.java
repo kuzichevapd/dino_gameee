@@ -13,10 +13,10 @@ public class DinoGame extends ApplicationAdapter{
     GameModel model;
     HeroView heroView;
     GroundView groundView;
-    CactiView cactiView;
+    CactusView cactiView;
     Scores scores;
     RestartButton button;
-    ScoresCount finalScore;
+    FinalScore finalScore;
 
     //делается перед запуском графики
     @Override
@@ -25,10 +25,10 @@ public class DinoGame extends ApplicationAdapter{
         model = new GameModel();
         heroView = new HeroView(model.getHero());
         groundView = new GroundView(model.getGround());
-        cactiView = new CactiView(model.getCactusSpawner());
+        cactiView = new CactusView(model.getCactusSpawner());
         scores = new Scores();
         button = new RestartButton();
-        finalScore = new ScoresCount();
+        finalScore = new FinalScore();
 
     }
 
@@ -59,5 +59,8 @@ public class DinoGame extends ApplicationAdapter{
     public void dispose() {
         batch.dispose();
         heroView.dispose();
+        groundView.dispose();
+        cactiView.dispose();
+        scores.dispose();
     }
 }

@@ -11,14 +11,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class CactiView {
+public class CactusView {
     Map<Integer, Integer> spritesById;
     final private CactusSpawner spawner;
     //список со спрайтами кактусов
     final private ArrayList<Texture> sprites;
     private int firstId;
 
-    public CactiView(CactusSpawner spawner) {
+    public CactusView(CactusSpawner spawner) {
         this.spawner = spawner;
         sprites = new ArrayList<>();
         sprites.add(new Texture(Config.CACTUS_1_SPRITE_NAME));
@@ -62,5 +62,11 @@ public class CactiView {
             }
         }
     }
+
+    public void dispose() {
+        sprites.get(0).dispose();
+        sprites.get(1).dispose();
+    }
+
 
 }

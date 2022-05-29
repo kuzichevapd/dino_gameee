@@ -5,6 +5,7 @@ import com.dinogame.Config;
 
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
+
 public class CactusSpawner {
     //место создания кактусов
     final private Vector2 spawnPosition;
@@ -31,14 +32,13 @@ public class CactusSpawner {
             //класс ThreadLocalRandom - это объеденение классов ThreadLocal и Random,
             // но последний плохо работает в многопоточной среде
             // проверка - настало ли время для спавна нового кактуса
-            int spriteNumber = ThreadLocalRandom.current().nextInt(0, 2);
-            cacti.add(createCactus(spriteNumber));
+            cacti.add(createCactus());
             spawnTime = ThreadLocalRandom.current().nextDouble(gameTime + 0.8, gameTime + 2);
         }
     }
 
     //создаем объект кактуса
-    private Cactus createCactus(int spriteNumber) {
+    public Cactus createCactus() {
         Cactus cactus = new Cactus(spawnPosition.x, spawnPosition.y, counter);
         // айди последующего увеличивается на один
         counter++;

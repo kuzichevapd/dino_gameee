@@ -16,13 +16,14 @@ public class GameModelTest {
     }
 
     @Test
-    public void checkDinoJump() {
+    public void dinoJumpTest() {
         model.update(0, true);
+        assertEquals(0, model.getHero().getVelocity().x);
         assertEquals(Config.JUMP_POWER - Config.GRAVITY, model.getHero().getVelocity().y);
     }
 
     @Test
-    public void testStartGame() {
+    public void startGameTest() {
         assertEquals(GameModel.GameState.START, model.getGameState());
         model.update(0, true);
         assertEquals(GameModel.GameState.RUN, model.getGameState());

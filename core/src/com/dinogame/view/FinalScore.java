@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.dinogame.Config;
 
-public class ScoresCount {
+public class FinalScore {
     final private Texture spriteTextGameIsOver;
     final private Texture spriteTextYourScoreIs;
     final private Texture spriteTextRestart;
@@ -18,7 +18,7 @@ public class ScoresCount {
     final private int numberWidth;
     final private TextureRegion[] numbers;
 
-    public ScoresCount() {
+    public FinalScore() {
         spriteTextGameIsOver = new Texture(Config.GAME_iS_OVER);
         spriteTextYourScoreIs = new Texture(Config.YOUR_SCORE_IS);
         spriteTextRestart = new Texture(Config.DO_YOU_WANT_TO_RESTART);
