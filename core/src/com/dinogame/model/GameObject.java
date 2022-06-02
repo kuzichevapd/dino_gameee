@@ -77,4 +77,17 @@ public class GameObject {
         return spriteRectangle;
     }
 
+    public float getX() {
+        return spriteRectangle.x;
+    }
+
+    public float getY() {
+        return spriteRectangle.y;
+    }
+
+    public float getWidth() {
+        return spriteRectangle.width;
+    }
+
+
 }

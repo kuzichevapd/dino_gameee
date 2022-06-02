@@ -8,30 +8,23 @@ import com.dinogame.Config;
 import com.dinogame.model.Hero;
 
 public class HeroView {
-    final private Hero hero;
     final private TextureRegion heroSprite;
     private Texture animationFrames;
     private Animation<TextureRegion> runAnimation;
 
-    public HeroView(Hero hero) {
-        this.hero = hero;
+    public HeroView() {
         heroSprite = new TextureRegion(new Texture(Config.HERO_SPRITE_NAME));
         setRunAnimation();
     }
 
-    // класс TextureRegion описывает прямоугольник внутри текстуры и полезен при рисовании только части текстуры
-    private TextureRegion getSprite(float gameTime) {
-        // если динозаврик бежит - анимация зацикливается
-        if (hero.getHeroState() == Hero.HeroState.RUNNING) {
-            return runAnimation.getKeyFrame(gameTime, true);
-        } else {
-            return heroSprite;
-        }
+    public void drawStatic(SpriteBatch batch, float x, float y) {
+        batch.draw(heroSprite, x, y);
     }
 
-    public void draw(SpriteBatch batch, float gameTime) {
-        batch.draw(getSprite(gameTime), hero.getSpriteRectangle().x, hero.getSpriteRectangle().y);
+    public void drawAnimated(SpriteBatch batch, float x, float y, float gameTime) {
+        batch.draw(runAnimation.getKeyFrame(gameTime, true), x, y);
     }
+
 
     private void setRunAnimation() {
         animationFrames = new Texture(Config.HERO_ANIMATION_NAME);

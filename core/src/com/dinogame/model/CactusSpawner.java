@@ -4,25 +4,33 @@ import com.badlogic.gdx.math.Vector2;
 import com.dinogame.Config;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class CactusSpawner {
     //место создания кактусов
     final private Vector2 spawnPosition;
     //список с отображаемыми на экране кактусами.
-    final private ArrayList<Cactus> cacti;
+    final private List<Cactus> cacti;
     //промежуток времени между кактусами. Задается рандомно после каждого создания.
     private double spawnTime;
-    private int counter;
+    // карта, где ключи - идущие по порядку числа(номера кактусов),
+    // а значение - рандомная картинка одного из двух кактусов
+    private final Map<Integer, Integer> cactusIdToSpriteIndex;
+    //текущее айди кактуса
+    private int currentCactusId;
 
     public CactusSpawner() {
         spawnPosition = new Vector2(Config.WINDOW_WIDTH, Config.GROUND_LEVEL);
         cacti = new ArrayList<>();
         spawnTime = 0;
-        counter = 0;
+        cactusIdToSpriteIndex = new HashMap<>();
+        currentCactusId = 0;
     }
 
-    public ArrayList<Cactus> getCacti() {
+    public List<Cactus> getCacti() {
         return cacti;
     }
 
@@ -32,16 +40,23 @@ public class CactusSpawner {
             //класс ThreadLocalRandom - это объеденение классов ThreadLocal и Random,
             // но последний плохо работает в многопоточной среде
             // проверка - настало ли время для спавна нового кактуса
-            cacti.add(createCactus());
+            Cactus cactus = createCactus();
+            cacti.add(cactus);
+            cactusIdToSpriteIndex.put(cactus.getId(),
+                    ThreadLocalRandom.current().nextInt(0, 2));
             spawnTime = ThreadLocalRandom.current().nextDouble(gameTime + 0.8, gameTime + 2);
         }
     }
 
+    public int getSpriteIndexByCactusId(int cactusId) {
+        return cactusIdToSpriteIndex.get(cactusId);
+    }
+
     //создаем объект кактуса
     public Cactus createCactus() {
-        Cactus cactus = new Cactus(spawnPosition.x, spawnPosition.y, counter);
+        Cactus cactus = new Cactus(spawnPosition.x, spawnPosition.y, currentCactusId);
         // айди последующего увеличивается на один
-        counter++;
+        currentCactusId++;
         //все кактусы двигаются в направлении игрока
         cactus.setVelocity(-Config.RUN_SPEED, 0);
         //делаем поменьше коллайдер кактуса, чтобы удобнее играть было

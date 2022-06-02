@@ -17,7 +17,7 @@ public class GameModelTest {
 
     @Test
     public void dinoJumpTest() {
-        model.update(0, true);
+        model.update(0);
         assertEquals(0, model.getHero().getVelocity().x);
         assertEquals(Config.JUMP_POWER - Config.GRAVITY, model.getHero().getVelocity().y);
     }
@@ -25,7 +25,7 @@ public class GameModelTest {
     @Test
     public void startGameTest() {
         assertEquals(GameModel.GameState.START, model.getGameState());
-        model.update(0, true);
+        model.update(0);
         assertEquals(GameModel.GameState.RUN, model.getGameState());
     }
 

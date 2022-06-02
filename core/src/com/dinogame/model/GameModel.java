@@ -1,5 +1,7 @@
 package com.dinogame.model;
+
 import com.dinogame.Config;
+
 public class GameModel {
     //игровые сущности
     final private Hero hero;
@@ -28,6 +30,14 @@ public class GameModel {
         return ground;
     }
 
+    public float getHeroPositionX() {
+        return hero.getSpriteRectangle().x;
+    }
+
+    public float getHeroPositionY() {
+        return hero.getSpriteRectangle().y;
+    }
+
     public CactusSpawner getCactusSpawner() {
         return cactusSpawner;
     }
@@ -40,12 +50,9 @@ public class GameModel {
         return gameState;
     }
 
-    //функция для управления. Т.к. игра управляется одним пробелом,
-    //то нет смысла создавать отдельный класс под контроллер
     // проверяет, что в случае, если нажат пробел выбирает какое состояние героя задано из значений класса GameState
     // если старт - начинаем игру, gameState = run, то есть начинаем бежать, а потом прыгем
-    private void checkController(boolean isKeyPressed) {
-        if (isKeyPressed) {
+    public void doAction() {
             switch (gameState) {
                 case START:
                     startGame();
@@ -58,7 +65,6 @@ public class GameModel {
                     restartGame();
                     break;
             }
-        }
     }
 
     //обновляет состояние персонажа
@@ -87,8 +93,7 @@ public class GameModel {
     }
 
     //обновляет состояние игры
-    public void update(float time, boolean isKeyPressed) {
-        checkController(isKeyPressed);
+    public void update(float time) {
         if (gameState == GameState.RUN) {
             gameTime += time;
             heroUpdate();

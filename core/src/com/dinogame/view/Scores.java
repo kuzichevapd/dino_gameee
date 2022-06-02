@@ -8,13 +8,13 @@ import com.dinogame.Config;
 
 public class Scores {
     //массив, где будут храниться спрайты цифр
-    private final TextureRegion[] numbers;
+    final private TextureRegion[] numbers;
     //ширина одной цифры
-    private final int numberWidth;
+    final private int numberWidth;
     //местоположение на экране
-    private final Vector2 position;
+    final private Vector2 position;
     //текстура со спрайтами цифр
-    Texture sprite;
+    final private Texture sprite;
 
     public Scores() {
         sprite = new Texture(Config.NUMBERS_SPRITE_NAME);
