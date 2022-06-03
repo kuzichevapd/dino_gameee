@@ -23,9 +23,7 @@ public class Scores {
         //делим изначальную текстуру на части шириной в одну цифру и заносим из в массив
         TextureRegion[][] split = TextureRegion.split(sprite, numberWidth, sprite.getHeight());
         numbers = new TextureRegion[10];
-        for (int i = 0; i < split[0].length; i++) {
-            numbers[i] = split[0][i];
-        }
+        System.arraycopy(split[0], 0, numbers, 0, split[0].length);
     }
 
     //отрисовываем очки равные пройденному игровому времени. Вызывается каждый кадр.

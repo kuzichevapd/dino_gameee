@@ -31,9 +31,7 @@ public class HeroView {
         TextureRegion[][] running = TextureRegion.split(animationFrames,
                 animationFrames.getWidth() / Config.HERO_ANIMATION_FRAMES, animationFrames.getHeight());
         TextureRegion[] frames = new TextureRegion[Config.HERO_ANIMATION_FRAMES];
-        for (int i = 0; i < Config.HERO_ANIMATION_FRAMES; i++) {
-            frames[i] = running[0][i];
-        }
+        System.arraycopy(running[0], 0, frames, 0, Config.HERO_ANIMATION_FRAMES);
         // первый параметр - время кадра, второй - массив из кадров, представляющих анимацию
         runAnimation = new Animation<>(1f / Config.RUN_SPEED, frames);
     }
