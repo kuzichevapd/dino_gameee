@@ -1,6 +1,6 @@
 package com.dinogame.model;
 
-import com.dinogame.Config;
+import com.dinogame.config.Config;
 
 public class Hero extends GameObject {
     private HeroState heroState;

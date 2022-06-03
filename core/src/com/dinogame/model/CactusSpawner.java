@@ -1,7 +1,7 @@
 package com.dinogame.model;
 
 import com.badlogic.gdx.math.Vector2;
-import com.dinogame.Config;
+import com.dinogame.config.Config;
 
 import java.util.ArrayList;
 import java.util.HashMap;

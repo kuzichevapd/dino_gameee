@@ -4,8 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.dinogame.Config;
-import com.dinogame.model.Hero;
+import com.dinogame.config.Config;
 
 public class HeroView {
     final private TextureRegion heroSprite;

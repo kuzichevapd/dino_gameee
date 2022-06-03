@@ -66,7 +66,7 @@ public class Controller extends ApplicationAdapter{
         }
         scores.draw(batch, model.getGameTime());
         batch.end();
-        // отричовка финального окна
+        // отрисовка финального окна
         if (model.getGameState() == GameModel.GameState.STOP) {
             Gdx.graphics.getGL20().glClearColor(1, 1, 1, 1);
             Gdx.graphics.getGL20().glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);

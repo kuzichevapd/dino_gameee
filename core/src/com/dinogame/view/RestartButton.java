@@ -2,7 +2,7 @@ package com.dinogame.view;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.dinogame.Config;
+import com.dinogame.config.Config;
 
 public class RestartButton {
     final private Texture sprite;

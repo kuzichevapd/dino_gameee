@@ -1,5 +1,5 @@
 
-import com.dinogame.Config;
+import com.dinogame.config.Config;
 import com.dinogame.model.GameModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

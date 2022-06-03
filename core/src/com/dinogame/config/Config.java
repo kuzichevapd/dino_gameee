@@ -1,4 +1,4 @@
-package com.dinogame;
+package com.dinogame.config;
 
 public class Config {
     public static final int WINDOW_WIDTH = 800;

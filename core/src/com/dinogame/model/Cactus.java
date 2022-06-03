@@ -1,6 +1,6 @@
 package com.dinogame.model;
 
-import com.dinogame.Config;
+import com.dinogame.config.Config;
 
 public class Cactus extends GameObject {
     private final int id;

@@ -1,4 +1,4 @@
-import com.dinogame.Config;
+import com.dinogame.config.Config;
 import com.dinogame.model.Cactus;
 import com.dinogame.model.CactusSpawner;
 import org.junit.jupiter.api.BeforeEach;
