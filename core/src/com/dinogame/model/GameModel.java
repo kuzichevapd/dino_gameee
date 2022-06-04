@@ -99,8 +99,12 @@ public class GameModel {
     private void recordSpawnerUpdate() {
         recordSpawner.spawnRecord(gameTime);
         recordSpawner.checkRecordOutcome();
+        if (recordSpawner.checkHeroCollisionWithRecord(hero) != -1){
+            recordSpawner.remove(recordSpawner.checkHeroCollisionWithRecord(hero));
+        }
         recordSpawner.updateRecordPosition();
     }
+
 
     //обновляет состояние игры
     public void update(float time) {

@@ -17,7 +17,7 @@ public class RecordSpawner {
     private final List<Record> recordsList;
 
     public RecordSpawner() {
-        spawnPosition = new Vector2(Config.WINDOW_WIDTH, Config.GROUND_LEVEL - 70);
+        spawnPosition = new Vector2(Config.WINDOW_WIDTH, Config.GROUND_LEVEL + 96);
         spawnTime = 0;
         recordToId = new HashMap<>();
         currentRecordId = 0;
@@ -25,7 +25,7 @@ public class RecordSpawner {
     }
 
     public Record createRecord() {
-        Record record  = new Record(spawnPosition.x, spawnPosition.y, currentRecordId);
+        Record record = new Record(spawnPosition.x, spawnPosition.y, currentRecordId);
         currentRecordId++;
         record.setVelocity(-Config.RUN_SPEED, 0);
         return record;
@@ -59,6 +59,17 @@ public class RecordSpawner {
         }
     }
 
+    public void remove(int id) {
+        recordsList.remove(id);
+    }
+
+    public int checkHeroCollisionWithRecord(Hero hero) {
+        for (GameObject record : recordsList) {
+            if (record.checkCollision(hero)) return recordsList.indexOf(record);
+        }
+        return -1;
+    }
+
     public void restart() {
         removeAll();
         spawnTime = 0;
@@ -71,7 +82,6 @@ public class RecordSpawner {
     public int getSpriteIndexByRecordId(int recordId) {
         return recordToId.get(recordId);
     }
-
 
 
 }

@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.dinogame.config.Config;
 import com.dinogame.model.*;
 import com.dinogame.model.Record;
 import com.dinogame.view.*;
@@ -19,7 +20,7 @@ public class Controller extends ApplicationAdapter {
     private RestartButton button;
     private FinalScore finalScore;
     private RecordView recordView;
-    private float  additiveScores ;
+    private float additiveScores;
 
     // перед запуском графики
     @Override
@@ -75,15 +76,16 @@ public class Controller extends ApplicationAdapter {
         for (Record record : model.getRecordSpawner().getRecordsList()) {
             recordView.drawRecord(batch, record.getX(), record.getY(), model.getRecordSpawner().
                     getSpriteIndexByRecordId(record.getId()));
-            if (record.getX() == model.getHeroPositionX()) {
+            if (model.getRecordSpawner().checkHeroCollisionWithRecord(model.getHero()) != -1) {
                 if (model.getRecordSpawner().getSpriteIndexByRecordId(record.getId()) == 0) {
                     additiveScores += 5;
                 } else if (model.getRecordSpawner().getSpriteIndexByRecordId(record.getId()) == 1) {
                     additiveScores += 10;
                 }
             }
+
         }
-        scores.draw(batch, model.getGameTime(), additiveScores );
+        scores.draw(batch, model.getGameTime(), additiveScores);
         batch.end();
         // отрисовка финального окна
         if (model.getGameState() == GameModel.GameState.STOP) {
