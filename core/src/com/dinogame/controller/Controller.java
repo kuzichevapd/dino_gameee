@@ -6,9 +6,10 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.dinogame.model.*;
+import com.dinogame.model.Record;
 import com.dinogame.view.*;
 
-public class Controller extends ApplicationAdapter{
+public class Controller extends ApplicationAdapter {
     private SpriteBatch batch;
     private GameModel model;
     private HeroView heroView;
@@ -17,6 +18,8 @@ public class Controller extends ApplicationAdapter{
     private Scores scores;
     private RestartButton button;
     private FinalScore finalScore;
+    private RecordView recordView;
+    private float  additiveScores ;
 
     // перед запуском графики
     @Override
@@ -29,6 +32,8 @@ public class Controller extends ApplicationAdapter{
         scores = new Scores();
         button = new RestartButton();
         finalScore = new FinalScore();
+        recordView = new RecordView();
+        additiveScores = 0;
     }
 
     // проверка на нажатие пробела
@@ -46,6 +51,9 @@ public class Controller extends ApplicationAdapter{
         }
         //обновление состояния игры
         model.update(Gdx.graphics.getDeltaTime());
+        if (model.getGameState() == GameModel.GameState.START) {
+            additiveScores = 0;
+        }
         // зарисовка фона
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -64,7 +72,18 @@ public class Controller extends ApplicationAdapter{
             cactusView.drawCactus(batch, cactus.getX(), cactus.getY(),
                     model.getCactusSpawner().getSpriteIndexByCactusId(cactus.getId()));
         }
-        scores.draw(batch, model.getGameTime());
+        for (Record record : model.getRecordSpawner().getRecordsList()) {
+            recordView.drawRecord(batch, record.getX(), record.getY(), model.getRecordSpawner().
+                    getSpriteIndexByRecordId(record.getId()));
+            if (record.getX() == model.getHeroPositionX()) {
+                if (model.getRecordSpawner().getSpriteIndexByRecordId(record.getId()) == 0) {
+                    additiveScores += 5;
+                } else if (model.getRecordSpawner().getSpriteIndexByRecordId(record.getId()) == 1) {
+                    additiveScores += 10;
+                }
+            }
+        }
+        scores.draw(batch, model.getGameTime(), additiveScores );
         batch.end();
         // отрисовка финального окна
         if (model.getGameState() == GameModel.GameState.STOP) {
@@ -72,7 +91,7 @@ public class Controller extends ApplicationAdapter{
             Gdx.graphics.getGL20().glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
             batch.begin();
             button.draw(batch);
-            finalScore.draw(batch, model.getGameTime());
+            finalScore.draw(batch, model.getGameTime(), additiveScores);
             batch.end();
         }
     }
@@ -85,10 +104,9 @@ public class Controller extends ApplicationAdapter{
         groundView.dispose();
         cactusView.dispose();
         scores.dispose();
+        finalScore.dispose();
+        additiveScores = 0;
     }
-
-
-
 
 
 }

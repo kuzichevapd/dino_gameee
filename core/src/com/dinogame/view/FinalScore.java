@@ -32,8 +32,8 @@ public class FinalScore {
         System.arraycopy(split[0], 0, numbers, 0, split[0].length);
     }
 
-    public void draw(SpriteBatch batch, float gameTime) {
-        int time = (int) gameTime;
+    public void draw(SpriteBatch batch, float gameTime, float additiveScores) {
+        int time = (int) gameTime + (int) additiveScores;
         int k = 0;
         while (time > 0) {
             int num = time % 10;
@@ -44,6 +44,12 @@ public class FinalScore {
         batch.draw(spriteTextGameIsOver, textPositionGameIsOver.x, textPositionGameIsOver.y);
         batch.draw(spriteTextYourScoreIs, textPositionYourScoreIs.x, textPositionYourScoreIs.y);
         batch.draw(spriteTextRestart, textPositionRestart.x, textPositionRestart.y);
+    }
+
+    public void dispose() {
+        spriteTextGameIsOver.dispose();
+        spriteTextRestart.dispose();
+        spriteTextYourScoreIs.dispose();
     }
 
 }

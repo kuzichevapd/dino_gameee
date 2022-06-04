@@ -27,8 +27,8 @@ public class Scores {
     }
 
     //отрисовываем очки равные пройденному игровому времени. Вызывается каждый кадр.
-    public void draw(SpriteBatch batch, float gameTime) {
-        int time = (int) gameTime;
+    public void draw(SpriteBatch batch, float gameTime, float additiveScores) {
+        int time = (int) gameTime + (int) additiveScores;
         int k = 0;
         if (time == 0) batch.draw(numbers[0], position.x, position.y);
         while (time > 0) {

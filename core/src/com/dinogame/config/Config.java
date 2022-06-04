@@ -21,6 +21,9 @@ public class Config {
     public static final String YOUR_SCORE_IS = "YOURSCOREIS.png";
     public static final String DO_YOU_WANT_TO_RESTART = "DOYOUWANTTORESTART.png";
     public static final String NUMBERS_FOR_SCORE = "numbersforscore.png";
+    public static final String CIRCLE_RECORD = "firstrecord.png";
+    public static final String STAR_RECORD = "secondrecord.png";
+
 
 
     public static final int HERO_WIDTH = 80;
@@ -31,4 +34,11 @@ public class Config {
 
     public static final int CACTUS_WIDTH = 50;
     public static final int CACTUS_HEIGHT = 96;
+
+    public static final int STAR_WIDTH = 46;
+    public static final int STAR_HEIGHT = 65;
+
+    public static final int CIRCLE_WIDTH = 46;
+    public static final int CIRCLE_HEIGHT = 65;
+
 }

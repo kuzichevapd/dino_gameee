@@ -10,6 +10,7 @@ public class GameModel {
     //текущее время с начала игры.
     private float gameTime;
     private GameState gameState;
+    final private RecordSpawner recordSpawner;
 
 
     // конструктор GameModel, отрисовывает большую часть игры
@@ -17,6 +18,7 @@ public class GameModel {
         hero = new Hero();
         ground = new Ground();
         cactusSpawner = new CactusSpawner();
+        recordSpawner = new RecordSpawner();
         gameState = GameState.START;
         gameTime = 0;
     }
@@ -41,6 +43,8 @@ public class GameModel {
     public CactusSpawner getCactusSpawner() {
         return cactusSpawner;
     }
+
+    public RecordSpawner getRecordSpawner() {return recordSpawner;}
 
     public float getGameTime() {
         return gameTime;
@@ -92,12 +96,19 @@ public class GameModel {
         cactusSpawner.updatePosition();
     }
 
+    private void recordSpawnerUpdate() {
+        recordSpawner.spawnRecord(gameTime);
+        recordSpawner.checkRecordOutcome();
+        recordSpawner.updateRecordPosition();
+    }
+
     //обновляет состояние игры
     public void update(float time) {
         if (gameState == GameState.RUN) {
             gameTime += time;
             heroUpdate();
             cactusSpawnerUpdate();
+            recordSpawnerUpdate();
             ground.move();
         }
     }
@@ -118,6 +129,7 @@ public class GameModel {
         gameState = GameState.START;
         gameTime = 0;
         cactusSpawner.restart();
+        recordSpawner.restart();
         hero.changePosition(Config.START_X, Config.GROUND_LEVEL);
     }
 
