@@ -3,6 +3,7 @@ package com.dinogame.view;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.dinogame.config.Config;
+
 import java.util.ArrayList;
 
 public class RecordView {

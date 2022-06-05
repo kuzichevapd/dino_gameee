@@ -11,7 +11,6 @@ public class DesktopLauncher {
 		config.setForegroundFPS(60);
 		config.setTitle("Google Dino Game");
 		config.setWindowedMode(Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT);
-		//VSync гарантирует, что графический процессор не отправляет ни одного кадра, пока на экране отображается предыдущий кадр
 		config.useVsync(true);
 		new Lwjgl3Application(new Controller(), config);
 

@@ -24,15 +24,12 @@ public class HeroView {
         batch.draw(runAnimation.getKeyFrame(gameTime, true), x, y);
     }
 
-
     private void setRunAnimation() {
         animationFrames = new Texture(Config.HERO_ANIMATION_NAME);
-        //split - двумерный массив кадров из текстуры
         TextureRegion[][] running = TextureRegion.split(animationFrames,
                 animationFrames.getWidth() / Config.HERO_ANIMATION_FRAMES, animationFrames.getHeight());
         TextureRegion[] frames = new TextureRegion[Config.HERO_ANIMATION_FRAMES];
         System.arraycopy(running[0], 0, frames, 0, Config.HERO_ANIMATION_FRAMES);
-        // первый параметр - время кадра, второй - массив из кадров, представляющих анимацию
         runAnimation = new Animation<>(1f / Config.RUN_SPEED, frames);
     }
 
@@ -40,5 +37,4 @@ public class HeroView {
         heroSprite.getTexture().dispose();
         animationFrames.dispose();
     }
-
 }

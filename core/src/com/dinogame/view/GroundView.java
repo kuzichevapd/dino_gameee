@@ -13,7 +13,6 @@ public class GroundView {
         sprite = new Texture(Config.GROUND_SPRITE_NAME);
     }
 
-    //отрисовываем две земли друг за другом. Вызывается каждый кадр.
     public void draw(SpriteBatch batch, float x, float y, float width) {
         batch.draw(sprite, x, y);
         batch.draw(sprite, x + width, y);

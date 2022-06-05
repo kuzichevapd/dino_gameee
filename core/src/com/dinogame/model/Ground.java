@@ -9,7 +9,6 @@ public class Ground extends GameObject {
         setCollider(0, 0, collider.width * 2, collider.height);
     }
 
-    //двигаем землю. Если первая земля ушла за экран, перемещаем земли на изначальные координаты. Вызывается каждый кадр.
     @Override
     public void move() {
         super.move();

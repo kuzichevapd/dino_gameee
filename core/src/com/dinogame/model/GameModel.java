@@ -3,17 +3,13 @@ package com.dinogame.model;
 import com.dinogame.config.Config;
 
 public class GameModel {
-    //игровые сущности
     final private Hero hero;
     final private Ground ground;
     final private CactusSpawner cactusSpawner;
-    //текущее время с начала игры.
     private float gameTime;
     private GameState gameState;
     final private RecordSpawner recordSpawner;
 
-
-    // конструктор GameModel, отрисовывает большую часть игры
     public GameModel() {
         hero = new Hero();
         ground = new Ground();
@@ -23,7 +19,6 @@ public class GameModel {
         gameTime = 0;
     }
 
-    // геттеры для различных составляющих GameModel
     public Hero getHero() {
         return hero;
     }
@@ -54,8 +49,6 @@ public class GameModel {
         return gameState;
     }
 
-    // проверяет, что в случае, если нажат пробел выбирает какое состояние героя задано из значений класса GameState
-    // если старт - начинаем игру, gameState = run, то есть начинаем бежать, а потом прыгем
     public void doAction() {
             switch (gameState) {
                 case START:
@@ -71,9 +64,6 @@ public class GameModel {
             }
     }
 
-    //обновляет состояние персонажа
-    // если он приземлился - то продолжаем бег
-    // если состояние - JUMPED, придаем ускорение вверх
     private void heroUpdate() {
         if (hero.checkCollision(ground) && hero.velocity.y < 0) {
             hero.run();
@@ -85,8 +75,6 @@ public class GameModel {
         hero.move();
     }
 
-    //обоновляет состояние генератора кактусов
-    // если столкнулся - останавливаем игру
     private void cactusSpawnerUpdate() {
         cactusSpawner.spawn(gameTime);
         cactusSpawner.checkInvisible();
@@ -105,8 +93,6 @@ public class GameModel {
         recordSpawner.updateRecordPosition();
     }
 
-
-    //обновляет состояние игры
     public void update(float time) {
         if (gameState == GameState.RUN) {
             gameTime += time;
@@ -117,18 +103,15 @@ public class GameModel {
         }
     }
 
-    //остановить игру (проигрыш)
     public void stopGame() {
         gameState = GameState.STOP;
         hero.stop();
     }
 
-    //начинаем бежать
     public void startGame() {
         gameState = GameState.RUN;
     }
 
-    //заново начинаем игру
     public void restartGame() {
         gameState = GameState.START;
         gameTime = 0;
@@ -137,7 +120,6 @@ public class GameModel {
         hero.changePosition(Config.START_X, Config.GROUND_LEVEL);
     }
 
-    // enum - класс с ограниченным количеством значений, этот класс оторбражает состояние игры
     public enum GameState {
         START, STOP, RUN
     }
